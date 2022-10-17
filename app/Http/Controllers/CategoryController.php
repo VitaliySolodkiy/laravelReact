@@ -14,8 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        dd($categories);
+        // $categories = Category::all();
+        // dd($categories);
+        return Category::all();
     }
 
     /**
@@ -36,7 +37,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        /* $category =  Category::create($request->all());
+        return $category; */
+        $category = new Category();
+        $category->name = $request->name;
+        $category->save();
+        return response()->json([
+            'success' => true,
+            'name' => $request->name,
+        ]);
     }
 
     /**
@@ -45,9 +57,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
@@ -68,9 +80,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $category->update($request->all());
+        return $category;
     }
 
     /**
@@ -79,8 +95,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return response()->json([
+            'message' => 'Category deleted successfully!'
+        ]);
     }
 }
