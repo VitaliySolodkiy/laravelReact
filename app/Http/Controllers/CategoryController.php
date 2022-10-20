@@ -47,7 +47,8 @@ class CategoryController extends Controller
         $category->save();
         return response()->json([
             'success' => true,
-            'name' => $request->name,
+            'name' => $category->name,
+            'id' => $category->id,
         ]);
     }
 
