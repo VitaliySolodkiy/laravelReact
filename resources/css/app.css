@@ -1,0 +1,62 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.product_list{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap:30px;
+    text-align: center;
+}
+.list-group{
+    width: 25%;
+}
+
+@media (max-width: 1400px){
+    .product_list{
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+    }
+    .list-group{
+        width: 50%;
+    }
+}
+
+@media (max-width: 767px){
+    .product_list{
+        grid-template-columns:  1fr;
+        justify-items: center;
+    }
+    .list-group{
+        width: 100%;
+    }
+}
+
+img{
+    max-width: 100%;
+}
+
+.cart-img{
+    width: 26px;
+}
+
+.list-group-item-action:focus, .list-group-item-action:hover {
+    background-color: #ffc107;
+}
+
+.card a{
+        color:black;
+}
+
+.card a:hover{
+    color:rgba(0, 0, 0, 0.692);
+}
+
+.product-img{
+    display: flex;
+    justify-content: center;
+}
+.input-group{
+    justify-content: center;
+}
+.input-group .form-control {
+    flex: 0 1 100px;
+}
