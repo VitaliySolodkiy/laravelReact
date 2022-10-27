@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import CartContext from '../../contexts/CartContext';
 
 const Product = () => {
 
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const [amount, setAmount] = useState(1);
+    const { addCartItem } = useContext(CartContext);
 
     useEffect(() => {
         getProductPageData();
@@ -35,7 +37,7 @@ const Product = () => {
                     min="1"
                     onChange={({ target }) => setAmount(target.value)}
                 />
-                <Button variant="warning" id="button-addon2">
+                <Button variant="warning" id="button-addon2" onClick={() => addCartItem({ ...product, amount })}>
                     Add to cart
                 </Button>
             </InputGroup>

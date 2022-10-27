@@ -19,5 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::fallback(function () {
+    return view('welcome');
+});
+
 // Route::resource('api/categories', CategoryController::class);
 // Route::resource('api/products', ProductController::class);

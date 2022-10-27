@@ -5,13 +5,10 @@ import Header from './Header';
 
 const App = () => {
     return (
-        <div>
-            <>
-                <Header />
-                <Router />
-            </>
-
-        </div>
+        <>
+            <Header />
+            <Router />
+        </>
     );
 }
 
