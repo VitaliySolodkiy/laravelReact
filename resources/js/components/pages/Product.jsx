@@ -10,7 +10,7 @@ const Product = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const [amount, setAmount] = useState(1);
-    const { addCartItem } = useContext(CartContext);
+    const { addCartItem, modalShow } = useContext(CartContext);
 
     useEffect(() => {
         getProductPageData();
@@ -37,7 +37,7 @@ const Product = () => {
                     min="1"
                     onChange={({ target }) => setAmount(target.value)}
                 />
-                <Button variant="warning" id="button-addon2" onClick={() => addCartItem({ ...product, amount })}>
+                <Button variant="warning" id="button-addon2" onClick={() => { addCartItem({ ...product, amount }); modalShow() }}>
                     Add to cart
                 </Button>
             </InputGroup>

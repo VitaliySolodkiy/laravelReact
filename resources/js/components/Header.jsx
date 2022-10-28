@@ -3,14 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import CartContext from '../contexts/CartContext';
 import Cart from "./Cart";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-    const { cartItems } = useContext(CartContext)
+    const { cartItems, modalClose, modalShow, showModalState } = useContext(CartContext)
 
-    const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const totalSum = () => cartItems.reduce((sum, item) => sum + item.price * item.amount, 0)
 
@@ -29,7 +27,7 @@ const Header = () => {
                             </li>
                         </ul>
                     </div>
-                    <Button variant="warning" onClick={handleShow} className="cart-btn">
+                    <Button variant="warning" onClick={modalShow} className="cart-btn">
                         <img className='cart-img' src="../icons/shopping-cart.png" alt="" />
                         {cartItems.length !== 0 ? <small>{cartItems.length}</small> : ''}
                     </Button>
@@ -37,7 +35,7 @@ const Header = () => {
             </nav>
 
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={showModalState} onHide={modalClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Cart</Modal.Title>
                 </Modal.Header>
@@ -45,13 +43,10 @@ const Header = () => {
                     <Cart />
                 </Modal.Body>
                 <Modal.Footer>
-                    <strong>Total: {totalSum()}</strong>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
+                    <div>Total: {totalSum()}</div>
+                    <Link to="/order" className='btn btn-primary' onClick={modalClose}>
+                        Place Order
+                    </Link>
                 </Modal.Footer>
             </Modal>
         </header>

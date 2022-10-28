@@ -25,6 +25,7 @@ const CartReducer = (state, action) => {
             return { cart: state.cart.filter(item => item.id !== action.id) };
 
         case 'incrementProduct':
+            //здесь лучше делать дип клон через lodash и потом работать с ним. после изменения вовращать его в свойство cart
             return {
                 cart: state.cart.map(item => {
                     if (item.id === action.id) {
@@ -45,7 +46,8 @@ const CartReducer = (state, action) => {
                     return item;
                 })
             }
-
+        case 'clearCart':
+            return { cart: [] };
         default:
             return state.cart
     }

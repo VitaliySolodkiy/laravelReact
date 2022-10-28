@@ -1,6 +1,6 @@
 // HOC - hight order component (компонет высшего порядка - комонент, который в параметрах принимает другой компонент и возвращает новый компонент)
 
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import CartContext from "../contexts/CartContext";
 import CartReducer from "../reducers/CartReducer";
 
@@ -8,6 +8,12 @@ const CartProvider = ({ children }) => { /* сюда принимаем комп
 
     const initialValues = { cart: (JSON.parse(localStorage.getItem('cart')) || []) };
     const [state, dispatch] = useReducer(CartReducer, initialValues);
+
+    //====управление модальным окном=====
+    const [showModalState, setShow] = useState(false);
+    const modalClose = () => setShow(false);
+    const modalShow = () => setShow(true);
+    //===========//==========
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(state.cart))
@@ -26,8 +32,13 @@ const CartProvider = ({ children }) => { /* сюда принимаем комп
         },
         decrementProduct: (id) => {
             dispatch({ type: "decrementProduct", id });
-        }
-
+        },
+        clearCart: () => {
+            dispatch({ type: "clearCart" });
+        },
+        modalClose,
+        modalShow,
+        showModalState
     };
 
     return (
