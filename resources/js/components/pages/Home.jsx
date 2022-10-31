@@ -21,7 +21,7 @@ const Home = () => {
 
     const productsMaps = (product) => {
         return (
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' }} key={product.id}>
                 <Link to={`/product/${product.id}`}>
                     <Card.Img variant="top" src={product.image} />
                     <Card.Body>

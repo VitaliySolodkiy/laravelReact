@@ -23,7 +23,24 @@ const Header = () => {
     }
 
 
-    const totalSum = () => cartItems.reduce((sum, item) => sum + item.price * item.amount, 0)
+    const totalSum = () => cartItems.reduce((sum, item) => sum + item.price * item.amount, 0);
+    const isCartEmpty = () => cartItems.length === 0 ? true : false;
+
+    const cartFooter = (isCartEmpty) => {
+        if (isCartEmpty) {
+            return (<p>Cart empty. You can go to <Link to="/" onClick={modalClose}>
+                catalog
+            </Link> and select products to buy</p>)
+        }
+        else {
+            return (<>
+                <p>Total: {totalSum()}</p>
+                <Link to="/order" className='btn btn-primary' onClick={modalClose}>
+                    Place Order
+                </Link>
+            </>)
+        }
+    }
 
     return (
         <header>
@@ -51,10 +68,14 @@ const Header = () => {
                                 </ul>
                             </li>
                         </ul>
+                        {/*                         <Button variant="warning" onClick={modalShow} className="cart-btn">
+                            <img className='cart-img' src="../icons/shopping-cart.png" alt="" />
+                            {!isCartEmpty() ? <small>{cartItems.length}</small> : ''}
+                        </Button> */}
                     </div>
                     <Button variant="warning" onClick={modalShow} className="cart-btn">
                         <img className='cart-img' src="../icons/shopping-cart.png" alt="" />
-                        {cartItems.length !== 0 ? <small>{cartItems.length}</small> : ''}
+                        {!isCartEmpty() ? <small>{cartItems.length}</small> : ''}
                     </Button>
                 </div>
             </nav>
@@ -64,14 +85,14 @@ const Header = () => {
                 <Modal.Header closeButton>
                     <Modal.Title>Cart</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <Cart />
-                </Modal.Body>
+                {!isCartEmpty()
+                    ? <Modal.Body>
+                        <Cart />
+                    </Modal.Body>
+                    : ''}
+
                 <Modal.Footer>
-                    <div>Total: {totalSum()}</div>
-                    <Link to="/order" className='btn btn-primary' onClick={modalClose}>
-                        Place Order
-                    </Link>
+                    {cartFooter(isCartEmpty())}
                 </Modal.Footer>
             </Modal>
         </header>
