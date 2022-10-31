@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import MiniCart from '../MiniCart';
+import MiniCart from '../cart/MiniCart';
 import { Button, Form, Input } from 'antd';
-import CartContext from '../../contexts/CartContext';
+import CartContext from '../../../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
+import 'antd/dist/antd.css';
 
 const Order = () => {
     const { cartItems, clearCart } = useContext(CartContext);
@@ -19,6 +20,7 @@ const Order = () => {
     }
     return (
         <div className='container'>
+            <h2 className="my-3">Checkout </h2>
             <div className="order">
                 <div className="contact">
                     <Form

@@ -1,4 +1,25 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+#root{
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+}
+.main-block{
+    display:flex;
+    padding: 10px;
+    flex: 1 1 auto;
+}
+
+.sidebar{
+    flex: 0 0 250px;
+    padding-right: 50px;
+    border-right: 1px solid rgb(219, 216, 216);
+}
+
+.content{
+    flex: 1 1 auto;
+}
 
 .product_list{
     display: grid;
@@ -7,7 +28,7 @@
     text-align: center;
 }
 .list-group{
-    width: 25%;
+    // width: 25%;
 }
 
 @media (max-width: 1400px){
@@ -16,7 +37,7 @@
         justify-items: center;
     }
     .list-group{
-        width: 50%;
+        // width: 50%;
     }
 }
 
@@ -26,7 +47,7 @@
         justify-items: center;
     }
     .list-group{
-        width: 100%;
+        // width: 100%;
     }
 }
 

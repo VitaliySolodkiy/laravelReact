@@ -1,13 +1,15 @@
 import React from 'react';
-import Router from '../router/Router';
+import Main from './Main';
 import Header from './Header';
+import Footer from './Footer';
 
 
 const App = () => {
     return (
         <>
             <Header />
-            <Router />
+            <Main />
+            <Footer />
         </>
     );
 }

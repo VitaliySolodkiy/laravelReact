@@ -13,7 +13,7 @@ const Category = () => {
 
     useEffect(() => {
         getCategoryPageData();
-    }, []);
+    }, [id]);
 
     const getCategoryPageData = async () => {
         await axios.get(`/api/category/${id}`)

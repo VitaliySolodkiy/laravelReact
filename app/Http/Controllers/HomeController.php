@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+
         $categories = Category::all();
         return response()->json([ //объект response
             'categories' => $categories,
@@ -30,6 +31,14 @@ class HomeController extends Controller
     {
         return response()->json([
             'product' => $product,
+        ], 200);
+    }
+
+    public function latestProducts()
+    {
+        $latestProducts = Product::latest()->take(4)->get();
+        return response()->json([ //объект response
+            'latestProducts' => $latestProducts,
         ], 200);
     }
 }

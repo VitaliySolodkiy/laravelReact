@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //определяем маршрут
 Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home-latest', [HomeController::class, 'latestProducts']);
 Route::get('/category/{category}', [HomeController::class, 'category']);
 Route::get('/product/{product}', [HomeController::class, 'product']);
 

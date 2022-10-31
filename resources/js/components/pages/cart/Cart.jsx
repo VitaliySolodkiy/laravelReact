@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import CartContext from '../contexts/CartContext';
+import CartContext from '../../../contexts/CartContext';
 
 const Cart = () => {
     const { cartItems, removeCartItem, incrementProduct, decrementProduct } = useContext(CartContext);
@@ -16,7 +16,7 @@ const Cart = () => {
                     <div className='controls inc' onClick={() => incrementProduct(item.id)}>+</div>
 
                     <div>{item.price * item.amount}</div>
-                    <div ><button onClick={() => removeCartItem(item.id)}>X</button></div>
+                    <div ><a onClick={() => removeCartItem(item.id)}> <img src="../icons/delete-32.png" alt="" style={{ width: "24px" }} /> </a></div>
                 </div>
             ))}
         </div>
