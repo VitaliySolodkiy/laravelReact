@@ -4,11 +4,13 @@ import Modal from 'react-bootstrap/Modal';
 import CartContext from '../contexts/CartContext';
 import Cart from "./pages/cart/Cart";
 import { Link } from "react-router-dom";
+import AuthUserContext from '../contexts/AuthUserContext';
+import Logout from './Logout';
 
 const Header = () => {
-    const { cartItems, modalClose, modalShow, showModalState } = useContext(CartContext)
-
+    const { cartItems, modalClose, modalShow, showModalState } = useContext(CartContext);
     const [categories, setCategories] = useState([]);
+    const [authUser, setAuthUser] = useContext(AuthUserContext);
 
     useEffect(() => {
         getHeaderData();
@@ -67,16 +69,23 @@ const Header = () => {
                                     })}
                                 </ul>
                             </li>
+                            {/*                             <li className="nav-item">
+                                <Link className="nav-link" to="/login">Login</Link>
+                            </li> */}
+
+                            <li className="nav-item">
+                                {authUser
+                                    ? <Logout />
+                                    : <Link className="nav-link" to="/login">Login</Link>
+                                }
+                            </li>
                         </ul>
-                        {/*                         <Button variant="warning" onClick={modalShow} className="cart-btn">
-                            <img className='cart-img' src="../icons/shopping-cart.png" alt="" />
-                            {!isCartEmpty() ? <small>{cartItems.length}</small> : ''}
-                        </Button> */}
                     </div>
                     <Button variant="warning" onClick={modalShow} className="cart-btn">
                         <img className='cart-img' src="../icons/shopping-cart.png" alt="" />
                         {!isCartEmpty() ? <small>{cartItems.length}</small> : ''}
                     </Button>
+
                 </div>
             </nav>
 
