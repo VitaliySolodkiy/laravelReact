@@ -49,7 +49,7 @@ const Header = () => {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <Link to="/" className='navbar-brand' >MySite</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button className="navbar-toggler me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse " id="navbarSupportedContent">
@@ -69,18 +69,12 @@ const Header = () => {
                                     })}
                                 </ul>
                             </li>
-                            {/*                             <li className="nav-item">
-                                <Link className="nav-link" to="/login">Login</Link>
-                            </li> */}
-
-                            <li className="nav-item">
-                                {authUser
-                                    ? <Logout />
-                                    : <Link className="nav-link" to="/login">Login</Link>
-                                }
-                            </li>
+                        </ul>
+                        <ul className="navbar-nav me-3 mb-2 mb-lg-0 justify-content-end col">
+                            <Logout />
                         </ul>
                     </div>
+
                     <Button variant="warning" onClick={modalShow} className="cart-btn">
                         <img className='cart-img' src="../icons/shopping-cart.png" alt="" />
                         {!isCartEmpty() ? <small>{cartItems.length}</small> : ''}
@@ -104,7 +98,7 @@ const Header = () => {
                     {cartFooter(isCartEmpty())}
                 </Modal.Footer>
             </Modal>
-        </header>
+        </header >
     );
 }
 

@@ -7,6 +7,7 @@ import NotFound from '../components/pages/NotFound';
 import Order from '../components/pages/order/Order';
 import OrderThank from '../components/pages/order/OrderThank';
 import Product from '../components/pages/Product';
+import Registration from '../components/pages/Registration';
 
 const Router = () => {
     return (
@@ -17,6 +18,7 @@ const Router = () => {
             <Route path="/order" element={<Order />} />
             <Route path="/order-thank" element={<OrderThank />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/registration" element={<Registration />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

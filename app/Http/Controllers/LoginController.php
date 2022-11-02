@@ -29,4 +29,9 @@ class LoginController extends Controller
         $request->session()->regenerateToken(); //заново создается токен из сессии
         return response()->json('Logout success');
     }
+
+    public function registration(Request $request)
+    {
+        return response()->json('registration success');
+    }
 }

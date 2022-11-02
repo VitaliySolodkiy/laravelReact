@@ -24,10 +24,10 @@ const Login = () => {
     }
 
     return (
-        <div className="container w-50">
+        <div className="container ">
             <h2 className="my-3">Login</h2>
             <p style={{ color: 'red' }}>{error}</p>
-            <Form name="login" onFinish={submitHandler}>
+            <Form name="login" onFinish={submitHandler} className="w-50">
                 <Form.Item label="Email" name="email" rules={[{ required: true }, { email: true }]}>
                     <Input />
                 </Form.Item>

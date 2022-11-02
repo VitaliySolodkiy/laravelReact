@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 //группа маршрутов для зарегистрированных пользователей
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::post('logout', [LoginController::class, 'logout']);
 });
 
 //определяем маршрут
@@ -36,3 +36,4 @@ Route::get('/product/{product}', [HomeController::class, 'product']);
 Route::post('/order', [OrderController::class, 'placeOrder']);
 
 Route::post('login', [LoginController::class, 'authentificate']);
+Route::post('registration', [LoginController::class, 'registration']);
