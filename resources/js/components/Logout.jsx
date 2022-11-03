@@ -23,6 +23,7 @@ const Logout = () => {
                 </a>
                 <ul className="dropdown-menu dropdown-right">
                     <li><a className="dropdown-item" onClick={logoutHandler}>Logout</a></li>
+                    <li><Link className="dropdown-item" to="/admin">Admin</Link></li>
                 </ul>
             </li>)
         }

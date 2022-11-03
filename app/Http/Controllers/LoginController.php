@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -31,7 +34,46 @@ class LoginController extends Controller
     }
 
     public function registration(Request $request)
+
     {
-        return response()->json('registration success');
+
+        $rules = [
+
+            'name' => 'required',
+
+            'email' => 'required|unique:users',
+
+            'password' => 'required'
+
+        ];
+
+
+
+        $input = $request->only('name', 'email', 'password');
+
+
+
+        $validator = Validator::make($input, $rules);
+
+
+
+        if ($validator->fails()) {
+
+            return response()->json(['success' => false, 'errors' => $validator->messages()]);
+        }
+
+
+
+        User::create([
+
+            'name' => $request->name,
+
+            'email' => $request->email,
+
+            'password' => Hash::make($request->password),
+
+        ]);
+
+        return response()->json(['success' => true]);
     }
 }

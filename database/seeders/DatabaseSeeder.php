@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Vitalij',
             'email' => 'majestis777@gmail.com',
             'password' => bcrypt('12345678'),
+            'role' => 'admin',
         ]);
         Category::create([
             'name' => 'Phones',

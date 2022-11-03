@@ -2,10 +2,29 @@ import React, { useContext } from 'react';
 import 'antd/dist/antd.css';
 import { Button, Form, Input } from 'antd';
 import AuthUserContext from '../../contexts/AuthUserContext';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Registration = () => {
-
+    const [form] = Form.useForm();
     const [authUser, setAuthUser] = useContext(AuthUserContext);
+    const navigate = useNavigate();
+
+    const submitHandler = async (values) => {
+        const response = await axios.post("api/registration", values);
+        console.log(response);
+
+        if (!response.data.success) {
+            form.setFields([
+                {
+                    name: "email",
+                    errors: response.data.errors.email
+                },
+            ]);
+            return;
+        }
+        navigate('/login');
+    }
 
     return (
 
@@ -13,8 +32,8 @@ const Registration = () => {
             <h2 className="my-3">Registration</h2>
             {authUser
                 ? <h3>You are already logged in!</h3>
-                : <Form name="login" className="w-50">
-                    <Form.Item label="Name" name="name" rules={[{ required: true }, { len: 3 }]}>
+                : <Form name="login" className="w-50" form={form} onFinish={submitHandler}>
+                    <Form.Item label="Name" name="name" rules={[{ required: true }, { min: 3 }]}>
                         <Input />
                     </Form.Item>
                     <Form.Item label="Email" name="email" rules={[{ required: true }, { type: 'email' }]}>
