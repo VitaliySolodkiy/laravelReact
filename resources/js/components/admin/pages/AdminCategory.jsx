@@ -2,10 +2,9 @@ import React from 'react';
 
 const AdminCategory = () => {
     return (
-        <div>
-            <h2>Categories</h2>
-
-        </div>
+        <div className='container '>
+            <h2 className='my-3'>Categories</h2>
+        </div >
     );
 }
 
