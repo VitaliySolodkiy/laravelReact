@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { Button } from 'antd';
 import AuthUserContext from '../contexts/AuthUserContext';
 import axios from 'axios';
 
 import { Link } from "react-router-dom";
 
-const Logout = () => {
+const UserMenu = () => {
     const [authUser, setAuthUser] = useContext(AuthUserContext);
 
 
@@ -22,8 +21,8 @@ const Logout = () => {
                     {authUser.name}
                 </a>
                 <ul className="dropdown-menu dropdown-right">
-                    <li><a className="dropdown-item" onClick={logoutHandler}>Logout</a></li>
                     <li><Link className="dropdown-item" to="/admin">Admin</Link></li>
+                    <li><a className="dropdown-item" onClick={logoutHandler}>Logout</a></li>
                 </ul>
             </li>)
         }
@@ -45,4 +44,4 @@ const Logout = () => {
 
 }
 
-export default Logout;
+export default UserMenu;

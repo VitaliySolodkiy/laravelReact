@@ -5,7 +5,7 @@ import CartContext from '../contexts/CartContext';
 import Cart from "./pages/cart/Cart";
 import { Link } from "react-router-dom";
 import AuthUserContext from '../contexts/AuthUserContext';
-import Logout from './Logout';
+import UserMenu from './UserMenu';
 
 const Header = () => {
     const { cartItems, modalClose, modalShow, showModalState } = useContext(CartContext);
@@ -71,7 +71,7 @@ const Header = () => {
                             </li>
                         </ul>
                         <ul className="navbar-nav me-3 mb-2 mb-lg-0 justify-content-end col">
-                            <Logout />
+                            <UserMenu />
                         </ul>
                     </div>
 
