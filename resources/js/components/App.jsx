@@ -10,7 +10,7 @@ import OrderThank from './pages/order/OrderThank';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import NotFound from './pages/NotFound';
-import AdminCategory from './admin/pages/AdminCategory';
+import AdminCategory from './admin/pages/AdminCategory/AdminCategory';
 import Admin from './admin/Admin';
 import AdminHome from './admin/pages/AdminHome';
 

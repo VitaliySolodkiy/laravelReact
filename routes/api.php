@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
@@ -37,3 +38,5 @@ Route::post('/order', [OrderController::class, 'placeOrder']);
 
 Route::post('login', [LoginController::class, 'authentificate']);
 Route::post('registration', [LoginController::class, 'registration']);
+
+Route::resource('categories', CategoryController::class);
