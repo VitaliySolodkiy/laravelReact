@@ -174,3 +174,11 @@ flex: 1 0 auto;
     right:0;
     left:auto !important;
 }
+
+.order-total{
+    display:flex;
+    justify-content: end;
+    span{
+        font-weight: 700;
+    }
+}

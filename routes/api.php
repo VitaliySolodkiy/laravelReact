@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,3 +41,6 @@ Route::post('login', [LoginController::class, 'authentificate']);
 Route::post('registration', [LoginController::class, 'registration']);
 
 Route::resource('categories', CategoryController::class);
+Route::resource('products', ProductController::class);
+Route::resource('orders', OrderController::class);
+Route::get('order-details/{id}', [OrderController::class, 'orderDetails']);

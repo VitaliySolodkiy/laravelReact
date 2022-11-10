@@ -34,44 +34,25 @@ class LoginController extends Controller
     }
 
     public function registration(Request $request)
-
     {
 
         $rules = [
-
             'name' => 'required',
-
             'email' => 'required|unique:users',
-
             'password' => 'required'
-
         ];
 
-
-
         $input = $request->only('name', 'email', 'password');
-
-
-
         $validator = Validator::make($input, $rules);
 
-
-
         if ($validator->fails()) {
-
             return response()->json(['success' => false, 'errors' => $validator->messages()]);
         }
 
-
-
         User::create([
-
             'name' => $request->name,
-
             'email' => $request->email,
-
             'password' => Hash::make($request->password),
-
         ]);
 
         return response()->json(['success' => true]);

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import Button from 'react-bootstrap/Button';
-import EditModal from './edit-modal';
-import AddModal from './add-modal';
+import EditModal from './Modal/EditModal';
+import AddModal from './Modal/AddModal';
 
 const AdminCategory = () => {
     const [categories, setCategories] = useState([]);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::with('category')->get();
+        return $products;
     }
 
     /**
@@ -34,7 +36,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'image' => 'mimes:jpg,bmp,png,webp',
+        ]);
+
+        $product = Product::create($request->all());
+        return response()->json([
+            'success' => true,
+            'data' => $product
+        ]);
     }
 
     /**
@@ -77,8 +91,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return response()->json([
+            'message' => 'Product deleted successfully!'
+        ]);
     }
 }

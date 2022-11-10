@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
+
+    public function index()
+    {
+        return Order::all();
+    }
+
     function placeOrder(Request $request)
     {
         // dd($request->all());
@@ -36,5 +42,11 @@ class OrderController extends Controller
         Mail::to('majestis777@gmail.com')->send(new OrderShipped($order));
 
         return response()->json(['order_id' => $order->id]);
+    }
+
+    public function orderDetails($id)
+    {
+        $orderProducts = OrderItems::where('order_id', $id)->get();
+        return response()->json($orderProducts);
     }
 }
