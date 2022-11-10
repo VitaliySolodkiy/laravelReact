@@ -9,4 +9,9 @@ class OrderItems extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

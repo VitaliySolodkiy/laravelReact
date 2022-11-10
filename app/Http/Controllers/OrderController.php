@@ -46,7 +46,7 @@ class OrderController extends Controller
 
     public function orderDetails($id)
     {
-        $orderProducts = OrderItems::where('order_id', $id)->get();
-        return response()->json($orderProducts);
+        $orderProducts = Order::with('orderProducts')->where('id', $id)->get();
+        return response()->json($orderProducts[0]);
     }
 }

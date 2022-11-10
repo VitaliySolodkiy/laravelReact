@@ -5,6 +5,7 @@ import { Table } from 'antd';
 const AdminOrderDetails = () => {
     const { id } = useParams();
     const [order, setOrder] = useState([]);
+    const [orderProducts, setOrderProducts] = useState([]);
 
     useEffect(() => {
         getOrderData();
@@ -14,6 +15,7 @@ const AdminOrderDetails = () => {
         axios.get(`/api/order-details/${id}`)
             .then(({ data }) => {
                 setOrder(data);
+                setOrderProducts(data.order_products)
             })
     }
 
@@ -36,7 +38,7 @@ const AdminOrderDetails = () => {
         {
             title: "Total",
             key: "total",
-            render: (order) => order.product_price * order.product_amount
+            render: (orderProducts) => orderProducts.product_price * orderProducts.product_amount
         },
 
     ];
@@ -44,10 +46,18 @@ const AdminOrderDetails = () => {
     return (
         <div className='container'>
             <h2 className='my-3'>Order №{id}</h2>
-            <Table dataSource={order} columns={columns} rowKey='id' footer={() => {
-                const total = order.reduce((sum, elem) => sum + (elem.product_price * elem.product_amount), 0);
-                return <div className='order-total'><span>Total: {total}</span></div>
-            }} />
+            <p><b>Email:</b> {order.user_email}</p>
+            <p><b>Phone:</b> {order.user_phone}</p>
+            <p><b>Created at:</b> {order.created_at}</p>
+            <hr></hr>
+            <h4>Order Products:</h4>
+            <Table dataSource={orderProducts} columns={columns} rowKey='id'
+                footer={() => {
+                    const total = orderProducts.reduce((sum, elem) => sum + (elem.product_price * elem.product_amount), 0);
+                    return <div className='order-total'><span>Total: {total}</span></div>
+                }}
+            />
+
         </div>
     );
 }
