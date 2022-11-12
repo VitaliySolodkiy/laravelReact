@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Select, Upload } from 'antd';
+import { Form, Input, Select, Upload, Button } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 
-const FormProduct = () => {
+const FormProduct = ({ handleCancel, addProduct, editedProduct }) => {
     const [categories, setCategories] = useState([]);
+    const [fileList, setFileList] = useState([]);
+    const [form] = Form.useForm();
 
     useEffect(() => {
         getCategories();
     }, []);
+
+    useEffect(() => {
+        form.setFieldsValue(editedProduct ?? {}); //если товар существует (редактирование) записываются его данные в форму. Если же мы только создаем товар, то форма пустая
+    }, [editedProduct, form])
 
     const getCategories = async () => {
         const { data } = await axios.get('/api/categories');
@@ -34,14 +40,26 @@ const FormProduct = () => {
         imgWindow?.document.write(image.outerHTML);
     };
 
-    const initialValues = {};
-    const submitHandler = () => { };
+    const initialValues = {}
+
+    const submitHandler = async (values) => {
+        const { data } = await axios.post('/api/products', values, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        console.log(data.data)
+        if (data.success === true) {
+            addProduct(data.data);
+            handleCancel();
+        }
+    };
 
     return (
         <Form
             initialValues={initialValues}
             onFinish={submitHandler}
-
+            form={form}
         >
             <Form.Item
                 label="Name"
@@ -73,7 +91,7 @@ const FormProduct = () => {
                 rules={[{ required: true }]}
             >
                 <Select
-                    defaultValue="Choose Category"
+
                     style={{
                         width: 120,
                     }}
@@ -86,13 +104,24 @@ const FormProduct = () => {
                 label="Image"
                 name="image"
             >
-                <Upload action="/upload.do" listType="picture-card" maxCount={1} onPreview={onPreview}>
+                <Upload
+                    beforeUpload={() => false}
+                    onChange={({ fileList }) => setFileList(fileList)}
+                    listType="picture-card"
+                    maxCount={1}
+                    fileList={fileList}
+                    onPreview={onPreview}>
                     <div>
                         <PlusOutlined />
                         <div style={{ marginTop: 8 }}>Upload</div>
                     </div>
                 </Upload>
             </Form.Item>
+
+            <Form.Item>
+                <Button htmlType="submit" type="primary">Save</Button>
+            </Form.Item>
+
         </Form>
     );
 }

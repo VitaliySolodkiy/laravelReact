@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import React, { useState } from 'react';
 import FormProduct from './FormProduct';
 
-const Add = () => {
+const Add = ({ addProduct }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
         setIsModalOpen(true);
@@ -23,7 +23,10 @@ const Add = () => {
                 onCancel={handleCancel}
                 footer={null}
             >
-                <FormProduct />
+                <FormProduct
+                    handleCancel={handleCancel}
+                    addProduct={addProduct}
+                />
             </Modal>
         </>
     );

@@ -41,10 +41,19 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|numeric',
-            'image' => 'mimes:jpg,bmp,png,webp',
+            'image_file' => 'mimes:jpg,bmp,png,webp',
         ]);
 
         $product = Product::create($request->all());
+
+        if ($request->image_file) {
+            $path = $request->image_file->store('products', ['disk' => 'public']); //сохранение файла на сервер
+            $product->image = '/uploads/' . $path; //записываем путь к картинке в продукт
+            $product->save(); //сохраняем в БД
+        }
+
+        $product->category = $product->category; //у товара
+
         return response()->json([
             'success' => true,
             'data' => $product
@@ -82,7 +91,30 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'image_file' => 'mimes:jpg,bmp,png,webp',
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        $product->update($request->all());
+
+        if ($request->image_file) {
+            $path = $request->image_file->store('products', ['disk' => 'public']); //сохранение файла на сервер
+            $product->image = '/uploads/' . $path; //записываем путь к картинке в продукт
+            $product->save(); //сохраняем в БД
+        }
+
+        $product->category = $product->category; //у товара
+
+        return response()->json([
+            'success' => true,
+            'data' => $product
+        ]);
     }
 
     /**
