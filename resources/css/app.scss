@@ -182,3 +182,25 @@ flex: 1 0 auto;
         font-weight: 700;
     }
 }
+
+.product-item {
+    display: grid;
+    grid-template-columns:  1fr 10px 20px 10px 70px 50px;
+    gap: 15px;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 20px;
+    .controls{
+        font-size: 20px;
+        font-weight: 700;
+        cursor: pointer;
+        user-select: none;
+    }
+    .inc{
+color: rgb(69, 133, 228);
+    }
+    .dec{
+color: rgb(63, 63, 63);
+    }
+
+}

@@ -49,4 +49,51 @@ class OrderController extends Controller
         $orderProducts = Order::with('orderProducts')->where('id', $id)->get();
         return response()->json($orderProducts[0]);
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'user_email' => 'required',
+            'user_phone' => 'required|numeric',
+        ]);
+
+        $order = Order::findOrFail($id);
+        $order->user_email = $request['user_email'];
+        $order->user_phone = $request['user_phone'];
+        $order->save();
+
+        return response()->json([
+            'success' => true,
+            'data' => $order
+        ]);
+    }
+
+    public function updateOrderProducts(Request $request)
+    {
+
+        // dd($request->editedProducts);
+
+        foreach ($request->editedProducts as $item) {
+            $orderItem = OrderItems::findOrFail($item['id']);
+            if ($item['product_amount'] === 0) {
+                $orderItem->delete();
+            } else {
+                $orderItem->product_amount = $item['product_amount'];
+                $orderItem->save();
+            }
+        };
+
+        return response()->json([
+            'success' => true,
+            'data' => $request->editedProducts
+        ]);
+    }
+
+    public function destroy(Order $order)
+    {
+        $order->delete();
+        return response()->json([
+            'message' => 'Order deleted successfully!'
+        ]);
+    }
 }

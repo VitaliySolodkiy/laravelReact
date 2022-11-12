@@ -44,3 +44,4 @@ Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
 Route::resource('orders', OrderController::class);
 Route::get('order-details/{id}', [OrderController::class, 'orderDetails']);
+Route::post('order-products-update', [OrderController::class, 'updateOrderProducts']);

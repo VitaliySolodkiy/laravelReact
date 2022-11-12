@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Table } from 'antd';
+import EditOrderInfo from './EditOrderInfo';
+import EditOrderProducts from './EditOrderProducts';
 
 const AdminOrderDetails = () => {
     const { id } = useParams();
@@ -18,6 +20,7 @@ const AdminOrderDetails = () => {
                 setOrderProducts(data.order_products)
             })
     }
+
 
     const columns = [
         {
@@ -46,9 +49,13 @@ const AdminOrderDetails = () => {
     return (
         <div className='container'>
             <h2 className='my-3'>Order №{id}</h2>
+            <hr></hr>
+            <h4>Main info:</h4>
             <p><b>Email:</b> {order.user_email}</p>
             <p><b>Phone:</b> {order.user_phone}</p>
             <p><b>Created at:</b> {order.created_at}</p>
+            <p><b>Updated at:</b> {order.updated_at}</p>
+            <EditOrderInfo order={order} setOrder={setOrder} />
             <hr></hr>
             <h4>Order Products:</h4>
             <Table dataSource={orderProducts} columns={columns} rowKey='id'
@@ -57,6 +64,7 @@ const AdminOrderDetails = () => {
                     return <div className='order-total'><span>Total: {total}</span></div>
                 }}
             />
+            <EditOrderProducts orderProducts={orderProducts} setOrderProducts={setOrderProducts} />
 
         </div>
     );
