@@ -11,6 +11,7 @@ const AdminOrderDetails = () => {
 
     useEffect(() => {
         getOrderData();
+
     }, [id]);
 
     const getOrderData = () => {
@@ -20,6 +21,7 @@ const AdminOrderDetails = () => {
                 setOrderProducts(data.order_products)
             })
     }
+
 
 
     const columns = [
@@ -46,6 +48,12 @@ const AdminOrderDetails = () => {
 
     ];
 
+    const dateFormat = (str = '') => {
+        let x = (str).split('T').join(', ');
+        return x.slice(0, x.indexOf('.'))
+    }
+
+
     return (
         <div className='container'>
             <h2 className='my-3'>Order №{id}</h2>
@@ -53,8 +61,9 @@ const AdminOrderDetails = () => {
             <h4>Main info:</h4>
             <p><b>Email:</b> {order.user_email}</p>
             <p><b>Phone:</b> {order.user_phone}</p>
-            <p><b>Created at:</b> {order.created_at}</p>
-            <p><b>Updated at:</b> {order.updated_at}</p>
+            <p><b>Created at:</b> {dateFormat(order.created_at)}</p>
+            <p><b>Updated at:</b> {dateFormat(order.updated_at)}</p>
+
             <EditOrderInfo order={order} setOrder={setOrder} />
             <hr></hr>
             <h4>Order Products:</h4>
