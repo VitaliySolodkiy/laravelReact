@@ -27,7 +27,7 @@ const EditOrderProducts = ({ orderProducts, setOrderProducts }) => {
 
     const decrementProduct = (id) => {
         setEditedProducts(editedProducts.map(product => {
-            if (product.id === id && product.product_amount !== 0) {
+            if (product.id === id && product.product_amount !== 1) {
                 return { ...product, 'product_amount': product.product_amount -= 1 }
             }
             return product
@@ -66,15 +66,18 @@ const EditOrderProducts = ({ orderProducts, setOrderProducts }) => {
 
                 <div>
                     {editedProducts?.map(item => (
-                        <div key={item.id} className="product-item" >
-                            <div style={{ justifySelf: "flex-start" }}>{item.product_name}</div>
-                            <div className='controls dec' onClick={() => decrementProduct(item.id)}>–</div>
-                            <div>{item.product_amount}</div>
-                            <div className='controls inc' onClick={() => incrementProduct(item.id)}>+</div>
+                        item.product_amount !== 0
+                            ?
+                            <div key={item.id} className="product-item" >
+                                <div style={{ justifySelf: "flex-start" }}>{item.product_name}</div>
+                                <div className='controls dec' onClick={() => decrementProduct(item.id)}>–</div>
+                                <div>{item.product_amount}</div>
+                                <div className='controls inc' onClick={() => incrementProduct(item.id)}>+</div>
 
-                            <div>{item.product_price * item.product_amount}</div>
-                            <div onClick={() => removeProduct(item.id)}><a > X </a></div>
-                        </div>
+                                <div>{item.product_price * item.product_amount}</div>
+                                <div onClick={() => removeProduct(item.id)}><a > X </a></div>
+                            </div>
+                            : ''
                     ))}
                 </div>
 
