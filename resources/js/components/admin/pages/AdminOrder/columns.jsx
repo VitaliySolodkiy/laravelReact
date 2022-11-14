@@ -1,7 +1,13 @@
 import { EyeOutlined, DeleteOutlined } from '@ant-design/icons';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const getColumns = (removeOrder) => {
+
+    const dateFormat = (str = '') => {
+        return moment(str).utc().format("YYYY-MM-DD, HH:mm:ss")
+    }
+
     const columns = [
         {
             title: "Order number",
@@ -24,9 +30,14 @@ const getColumns = (removeOrder) => {
             key: "user_phone",
         },
         {
-            title: "Create date",
-            dataIndex: "created_at",
+            title: "Create",
             key: "created_at",
+            render: (order) => dateFormat(order.created_at)
+        },
+        {
+            title: "Update",
+            key: "created_at",
+            render: (order) => dateFormat(order.updated_at)
         },
         {
             title: "Action",

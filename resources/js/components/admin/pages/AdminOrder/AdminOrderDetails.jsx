@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Table } from 'antd';
 import EditOrderInfo from './EditOrderInfo';
 import EditOrderProducts from './EditOrderProducts';
+import moment from 'moment';
 
 const AdminOrderDetails = () => {
     const { id } = useParams();
@@ -49,8 +50,7 @@ const AdminOrderDetails = () => {
     ];
 
     const dateFormat = (str = '') => {
-        let x = (str).split('T').join(', ');
-        return x.slice(0, x.indexOf('.'))
+        return moment(str).utc().format("YYYY-MM-DD, HH:mm:ss")
     }
 
 

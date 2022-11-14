@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Modal } from 'antd';
+import moment from 'moment';
 
 const EditOrderInfo = ({ order, setOrder }) => {
 
@@ -20,6 +21,7 @@ const EditOrderInfo = ({ order, setOrder }) => {
             ...order,
             'user_email': values.user_email,
             "user_phone": values.user_phone,
+            "updated_at": moment()
         })
         handleCancel();
     }

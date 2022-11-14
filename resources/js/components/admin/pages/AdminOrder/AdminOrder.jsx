@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import getColumns from './columns';
 import Swal from 'sweetalert2';
 
+
 const AdminOrder = () => {
 
     const [orders, setOrders] = useState([]);
@@ -33,6 +34,8 @@ const AdminOrder = () => {
             }
         })
     }
+
+
 
 
     return (
