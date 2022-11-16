@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'antd';
 import FormProduct from './FormProduct';
 
-const Edit = ({ isEditModalOpen, setIsEditModalOpen, editedProduct }) => {
+const Edit = ({ isEditModalOpen, setIsEditModalOpen, editedProduct, editProduct }) => {
 
     const handleCancel = () => {
         setIsEditModalOpen(false);
@@ -20,6 +20,7 @@ const Edit = ({ isEditModalOpen, setIsEditModalOpen, editedProduct }) => {
                     handleCancel={handleCancel}
                     addProduct={null}
                     editedProduct={editedProduct}
+                    editProduct={editProduct}
                 />
             </Modal>
         </div>

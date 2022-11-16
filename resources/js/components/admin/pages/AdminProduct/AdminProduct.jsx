@@ -30,12 +30,21 @@ const AdminProduct = () => {
     }
 
     const editProduct = async (id, values) => {
-        const { data } = await axios.put('/api/products' + id, values, {
+        const { data } = await axios.post('/api/products/' + id, values, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         });
-        console.log(data)
+        const updatedProducts = _.cloneDeep(products);
+        const product = updatedProducts.find(p => p.id === id);
+        /*         product.name = data.data.name;
+                product.description = data.data.description;
+                product.price = data.data.price;
+                product.category = data.data.category;
+                product.image = data.data.image; */
+
+        _.assign(product, data.data)
+        setProducts(updatedProducts);
     }
 
 
@@ -49,6 +58,7 @@ const AdminProduct = () => {
                 isEditModalOpen={isEditModalOpen}
                 setIsEditModalOpen={setIsEditModalOpen}
                 editedProduct={editedProduct}
+                editProduct={editProduct}
             />
             <Table
                 dataSource={products}

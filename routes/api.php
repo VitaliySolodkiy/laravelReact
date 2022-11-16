@@ -42,6 +42,8 @@ Route::post('registration', [LoginController::class, 'registration']);
 
 Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
+Route::post('products/{id}', [ProductController::class, 'update']);
 Route::resource('orders', OrderController::class);
 Route::get('order-details/{id}', [OrderController::class, 'orderDetails']);
 Route::post('order-products-update', [OrderController::class, 'updateOrderProducts']);
+Route::get('search', [HomeController::class, 'search']);

@@ -14,7 +14,7 @@ const Product = () => {
 
     useEffect(() => {
         getProductPageData();
-    }, []);
+    }, [id]);
 
     const getProductPageData = async () => {
         await axios.get(`/api/product/${id}`)

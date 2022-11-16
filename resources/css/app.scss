@@ -204,3 +204,28 @@ color: rgb(63, 63, 63);
     }
 
 }
+
+.search-block{
+    position: relative;
+    .search-result{
+        position: absolute;
+        z-index: 10;
+        width: 200px;
+        background: #fff;
+        border: 1px solid rgb(161, 161, 161);
+        top: 0;
+        left: 0;
+        margin-top: 30px;
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        li{
+            padding: 5px;
+            &:nth-child(odd){
+                background: rgb(192, 192, 192);
+            }
+        }
+    }
+}

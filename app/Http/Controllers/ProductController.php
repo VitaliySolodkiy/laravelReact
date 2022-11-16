@@ -52,7 +52,8 @@ class ProductController extends Controller
             $product->save(); //сохраняем в БД
         }
 
-        $product->category = $product->category; //у товара
+        $product->category = $product->category;
+        $product->image = $product->image; //когда создали товар и сохранили его, у нас нет картинки и данные возвращаются без изображения. Свойство со значением undefined в JSON не преобразовывается. Мы тут явно говорим что у продукта явно будет свойство image. при обращении к свойству image у модели отрабатывает геттер ($product->image), который проверяет есть ли в базе данных путь к картине, если есть - возвращается путь, если нет - возвращается картинка заглушка. 
 
         return response()->json([
             'success' => true,

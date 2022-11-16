@@ -5,7 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 
-const FormProduct = ({ handleCancel, addProduct, editedProduct }) => {
+const FormProduct = ({ handleCancel, addProduct, editedProduct, editProduct }) => {
     const [categories, setCategories] = useState([]);
     const [fileList, setFileList] = useState([]);
     const [form] = Form.useForm();
@@ -15,7 +15,12 @@ const FormProduct = ({ handleCancel, addProduct, editedProduct }) => {
     }, []);
 
     useEffect(() => {
-        form.setFieldsValue(editedProduct ?? {}); //если товар существует (редактирование) записываются его данные в форму. Если же мы только создаем товар, то форма пустая
+        if (editedProduct) {
+            form.setFieldsValue(editedProduct); //если товар существует (редактирование) записываются его данные в форму. Если же мы только создаем товар, то форма пустая
+            setFileList([{ url: editedProduct.image }])
+        }
+
+
     }, [editedProduct, form])
 
     const getCategories = async () => {
@@ -48,8 +53,9 @@ const FormProduct = ({ handleCancel, addProduct, editedProduct }) => {
                 "Content-Type": "multipart/form-data"
             }
         });
-        console.log(data.data)
+
         if (data.success === true) {
+
             addProduct(data.data);
             handleCancel();
         }
@@ -58,7 +64,10 @@ const FormProduct = ({ handleCancel, addProduct, editedProduct }) => {
     return (
         <Form
             initialValues={initialValues}
-            onFinish={submitHandler}
+            onFinish={(values) => {
+                editProduct ? editProduct(editedProduct.id, values) : submitHandler(values);
+                handleCancel();
+            }}
             form={form}
         >
             <Form.Item

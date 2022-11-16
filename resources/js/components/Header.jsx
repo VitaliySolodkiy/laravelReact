@@ -6,6 +6,7 @@ import Cart from "./pages/cart/Cart";
 import { Link } from "react-router-dom";
 import AuthUserContext from '../contexts/AuthUserContext';
 import UserMenu from './UserMenu';
+import Search from './Search';
 
 const Header = () => {
     const { cartItems, modalClose, modalShow, showModalState } = useContext(CartContext);
@@ -73,6 +74,7 @@ const Header = () => {
                         <ul className="navbar-nav me-3 mb-2 mb-lg-0 justify-content-end col">
                             <UserMenu />
                         </ul>
+                        <Search />
                     </div>
 
                     <Button variant="warning" onClick={modalShow} className="cart-btn">
