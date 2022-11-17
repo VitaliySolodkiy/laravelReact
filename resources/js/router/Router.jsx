@@ -16,6 +16,7 @@ import AdminHome from '../components/admin/pages/AdminHome';
 import AdminProduct from '../components/admin/pages/AdminProduct/AdminProduct';
 import AdminOrder from '../components/admin/pages/AdminOrder/AdminOrder'
 import AdminOrderDetails from '../components/admin/pages/AdminOrder/AdminOrderDetails';
+import SearchResult from '../components/pages/SearchResult';
 
 const Router = () => {
     const [authUser] = useContext(AuthUserContext);
@@ -43,6 +44,7 @@ const Router = () => {
                 <Route path="/order-thank" element={<OrderThank />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registration" element={<Registration />} />
+                <Route path="/search" element={<SearchResult />} />
             </Route>
             {adminRoutes()}
             <Route path="*" element={<NotFound />} />

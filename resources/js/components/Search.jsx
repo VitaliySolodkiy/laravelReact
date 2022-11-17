@@ -17,33 +17,37 @@ const Search = () => {
         setProducts([]);
     }
 
-    /* const searchPageHandler = (e) => {
+    const searchPageHandler = (e) => {
         e.preventDefault();
-        if (e.keyCode === 13) {
+        e.stopPropagation();
+        navigate(`/search?q=${searchText}`)
 
-        }
-        console.log(e.keyCode)
-    } */
+    }
 
     return (
         <div className='search-block'>
-            <form action="/search">
+            <form
+                onSubmit={searchPageHandler}
+            >
                 <input
                     type="search"
                     name="q"
                     value={searchText}
                     onInput={searchHandler}
+
                 />
             </form>
-            {products.length === 0 ? ' ' : (
-                <div className="search-result">
-                    <ul>
-                        {products.map(item => <li key={item.id}><a onClick={() => { setProducts([]); navigate(`/product/${item.id}`) }}>{item.name}</a></li>)}
-                    </ul>
-                </div>
-            )}
+            {
+                products.length === 0 ? ' ' : (
+                    <div className="search-result">
+                        <ul>
+                            {products.map(item => <li key={item.id}><a onClick={() => { setProducts([]); navigate(`/product/${item.id}`) }}>{item.name}</a></li>)}
+                        </ul>
+                    </div>
+                )
+            }
 
-        </div>
+        </div >
     );
 }
 
