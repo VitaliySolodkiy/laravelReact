@@ -8,6 +8,7 @@ import axios from 'axios';
 const FormProduct = ({ handleCancel, addProduct, editedProduct, editProduct }) => {
     const [categories, setCategories] = useState([]);
     const [fileList, setFileList] = useState([]);
+    const [fileListGallery, setFileListGallery] = useState([]);
     const [form] = Form.useForm();
 
     useEffect(() => {
@@ -119,6 +120,24 @@ const FormProduct = ({ handleCancel, addProduct, editedProduct, editProduct }) =
                     listType="picture-card"
                     maxCount={1}
                     fileList={fileList}
+                    onPreview={onPreview}>
+                    <div>
+                        <PlusOutlined />
+                        <div style={{ marginTop: 8 }}>Upload</div>
+                    </div>
+                </Upload>
+            </Form.Item>
+
+            <Form.Item
+                label="Gallery"
+                name="gallery"
+            >
+                <Upload
+                    beforeUpload={() => false}
+                    onChange={({ fileList }) => setFileListGallery(fileList)}
+                    listType="picture-card"
+                    maxCount={10}
+                    fileList={fileListGallery}
                     onPreview={onPreview}>
                     <div>
                         <PlusOutlined />

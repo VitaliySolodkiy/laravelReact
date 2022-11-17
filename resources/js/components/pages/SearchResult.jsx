@@ -17,7 +17,6 @@ const SearchResult = () => {
     useEffect(() => {
         getProducts();
     }, [query]);
-    console.log(products)
 
     const productsMaps = (product) => {
         return (
