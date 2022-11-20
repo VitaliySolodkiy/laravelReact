@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id')->nullable();
             $table->string('product_name', 255);
+            $table->string('product_size', 20)->nullable();
+            $table->string('product_color', 50)->nullable();
             $table->float('product_price');
             $table->integer('product_amount');
 
