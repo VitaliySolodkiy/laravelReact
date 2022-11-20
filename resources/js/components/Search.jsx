@@ -41,6 +41,7 @@ const Search = () => {
                 products.length === 0 ? ' ' : (
                     <div className="search-result">
                         <ul>
+                            y
                             {products.map(item => <li key={item.id}><a onClick={() => { setProducts([]); navigate(`/product/${item.id}`) }}>{item.name}</a></li>)}
                         </ul>
                     </div>
