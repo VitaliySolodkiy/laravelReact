@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Masons</title>
+    <title>Laravel</title>
     @viteReactRefresh
     @vite(['resources/css/app.scss', 'resources/js/index.jsx'])
 </head>

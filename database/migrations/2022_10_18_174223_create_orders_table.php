@@ -16,11 +16,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->float('total_sum');
-            $table->string('user_name', 64);
             $table->string('user_email', 64);
             $table->string('user_phone', 18);
-            $table->string('user_city', 64);
-            $table->integer('post_office');
             $table->timestamps();
         });
     }
